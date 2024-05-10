@@ -1,0 +1,16 @@
+[Unit]
+Description=FreeTAKServer service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+StandardOutput=append:/var/log/fts/fts-stdout.log
+StandardError=append:/var/log/fts/fts-stderr.log
+Environment="FTS_FIRST_START=false"
+ExecStart=/root/fts.venv/bin/python3 -m FreeTAKServer.controllers.services.FTS
+
+[Install]
+WantedBy=multi-user.target
